@@ -12,4 +12,8 @@ object Utils {
 
         return firstName to lastName
     }
+
+    fun toInitials(firstName: String?, lastName: String?): String? {
+        return firstName?.getOrNull(0)?.toUpperCase().toString() + lastName?.getOrNull(0)?.toUpperCase().toString()
+    }
 }
