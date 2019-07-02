@@ -30,7 +30,7 @@ fun Date.add(value: Int, units: TimeUnits):Date {
 
 fun Date.humanizeDiff(date: Date = Date()): String {
 
-    var delta = Date().time - this.time
+    var delta = date.time - this.time
     delta = delta
     var past = true
     if (delta < 0) {
@@ -38,22 +38,34 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         delta = -delta
     }
 
+
     var interval:String = when {
         delta / SECOND <= 1 -> "только что"
-        delta / SECOND <= 45 && past -> "меньше минуты"
-        delta / SECOND <= 45 && !past -> "меньше чем через минуту"
-        delta / SECOND in 46..75 && past -> "минуту"
+        delta / SECOND <= 45 && past -> "несколько секунд назад"
+        delta / SECOND <= 45 && !past -> "через несколько секунд"
+        delta / SECOND in 46..75 && past -> "минуту назад"
         delta / SECOND in 46..75 && !past -> "через минуту"
         delta / SECOND in 76..120 && past -> "${minutesAsPlurals(delta/ MINUTE)} назад"
         delta / SECOND in 76..120 && !past -> "через ${minutesAsPlurals(delta/ MINUTE)}"
-
-
+        delta / MINUTE in 2..45 && past -> "${minutesAsPlurals(delta/ MINUTE)} назад"
+        delta / MINUTE in 2..45 && !past -> "через ${minutesAsPlurals(delta/ MINUTE)}"
+        delta / MINUTE in 46..75 && past -> "час назад"
+        delta / MINUTE in 46..75 && !past -> "через час"
+        delta / MINUTE in 76..120 && past -> "${hoursAsPlurals(delta/ HOUR)} назад"
+        delta / MINUTE in 76..120 && !past -> "через ${hoursAsPlurals(delta/ HOUR)}"
+        delta / HOUR in 2..12 && past -> "${hoursAsPlurals(delta/ HOUR)} назад"
+        delta / HOUR in 2..12 && !past -> "через ${hoursAsPlurals(delta/ HOUR)}"
+        delta / HOUR in 13..26 && past -> "день назад"
+        delta / HOUR in 13..26 && !past -> "через день"
+        delta / HOUR in 27..47 && past -> "${daysAsPlurals(delta/ DAY)} назад"
+        delta / HOUR in 27..47 && !past -> "через ${daysAsPlurals(delta/ DAY)}"
+        delta / DAY in 2..360 && past -> "${daysAsPlurals(delta/ DAY)} назад"
+        delta / DAY in 2..360 && !past -> "через ${daysAsPlurals(delta/ DAY)}"
+        delta / DAY > 360 && past -> "более года назад"
+        delta / DAY > 360 && !past -> "более чем через год"
 
         else -> "никогда"
     }
-
-
-
 
     return interval
 }
@@ -81,10 +93,6 @@ private fun yearsAsPlurals(value: Long) = when (value.asPlurals) {
     TimePlurals.FEW -> "$value года"
     TimePlurals.MANY -> "$value лет"
 }
-
-
-
-
 
 
 val Long.asPlurals
