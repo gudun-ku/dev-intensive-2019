@@ -30,16 +30,75 @@ fun Date.add(value: Int, units: TimeUnits):Date {
 
 fun Date.humanizeDiff(date: Date = Date()): String {
 
-    val diff = Date().time - this.time
-    val seconds = diff / SECOND
-    val minutes = diff / MINUTE
-    val hours = diff / HOUR
-    val days = diff / DAY
+    var delta = Date().time - this.time
+    delta = delta
+    var past = true
+    if (delta < 0) {
+        past = false
+        delta = -delta
+    }
+
+    var interval:String = when {
+        delta / SECOND <= 1 -> "только что"
+        delta / SECOND <= 45 && past -> "меньше минуты"
+        delta / SECOND <= 45 && !past -> "меньше чем через минуту"
+        delta / SECOND in 46..75 && past -> "минуту"
+        delta / SECOND in 46..75 && !past -> "через минуту"
+        delta / SECOND in 76..120 && past -> "${minutesAsPlurals(delta/ MINUTE)} назад"
+        delta / SECOND in 76..120 && !past -> "через ${minutesAsPlurals(delta/ MINUTE)}"
+
+
+
+        else -> "никогда"
+    }
 
 
 
 
-    return "2 часа назад"
+    return interval
+}
+
+private fun minutesAsPlurals(value: Long) = when (value.asPlurals) {
+    TimePlurals.ONE -> "$value минуту"
+    TimePlurals.FEW -> "$value минуты"
+    TimePlurals.MANY -> "$value минут"
+}
+
+private fun hoursAsPlurals(value: Long) = when (value.asPlurals) {
+    TimePlurals.ONE -> "$value час"
+    TimePlurals.FEW -> "$value часа"
+    TimePlurals.MANY -> "$value часов"
+}
+
+private fun daysAsPlurals(value: Long) = when (value.asPlurals) {
+    TimePlurals.ONE -> "$value день"
+    TimePlurals.FEW -> "$value дня"
+    TimePlurals.MANY -> "$value дней"
+}
+
+private fun yearsAsPlurals(value: Long) = when (value.asPlurals) {
+    TimePlurals.ONE -> "$value год"
+    TimePlurals.FEW -> "$value года"
+    TimePlurals.MANY -> "$value лет"
+}
+
+
+
+
+
+
+val Long.asPlurals
+    get() = when {
+        this in 5L..20L -> TimePlurals.MANY
+        this % 10L == 1L -> TimePlurals.ONE
+        this % 10L in 2L..4L -> TimePlurals.FEW
+        else -> TimePlurals.MANY
+    }
+
+enum class TimePlurals {
+    ONE,
+    FEW,
+    MANY
 }
 
 enum class TimeUnits {
