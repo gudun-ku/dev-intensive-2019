@@ -4,9 +4,17 @@ package ru.skillbranch.devintensive.utils
 
 object Utils {
 
+    private fun removeWhiteSpaces(str: String?): String? = when(str) {
+        null -> null
+        else -> str.trim()?.replace("\\s+".toRegex(), " ")
+    }
+
     fun parseFullName(fullName: String?): Pair<String?, String?> {
 
-        val parts : List<String>? = fullName?.trim()?.split(" ")
+        val preparedFullName = removeWhiteSpaces(fullName)
+        println(preparedFullName)
+        val parts : List<String>? = preparedFullName?.split(" ")
+
         var firstName = parts?.getOrNull(0)
         var lastName = parts?.getOrNull(1)
         firstName = if (firstName.isNullOrBlank()) null else  firstName
