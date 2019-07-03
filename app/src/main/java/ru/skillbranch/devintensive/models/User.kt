@@ -69,6 +69,6 @@ data class User (
         fun isOnline(value: Boolean) = apply { this.isOnline = value }
 
 
-        fun build() = User(this)
+        fun build():User? = User(this)
     }
 }
