@@ -26,12 +26,11 @@ data class User (
         var lastId: Int = -1
         private set
 
-        fun makeUser (fullName: String?): User? {
+        fun makeUser (fullName: String?): User {
             lastId++
 
             val(firstName, lastName) = Utils.parseFullName(fullName)
-            return if(firstName!=null || lastName!=null) User(id= "$lastId", firstName = firstName,lastName = lastName)
-                   else null
+            return User(id= "$lastId", firstName = firstName,lastName = lastName)
         }
     }
 
@@ -69,6 +68,6 @@ data class User (
         fun isOnline(value: Boolean) = apply { this.isOnline = value }
 
 
-        fun build():User? = User(this)
+        fun build() = User(this)
     }
 }
