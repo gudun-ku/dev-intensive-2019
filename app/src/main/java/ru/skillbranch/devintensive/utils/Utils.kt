@@ -12,7 +12,6 @@ object Utils {
     fun parseFullName(fullName: String?): Pair<String?, String?> {
 
         val preparedFullName = removeWhiteSpaces(fullName)
-        println(preparedFullName)
         val parts : List<String>? = preparedFullName?.split(" ")
 
         var firstName = parts?.getOrNull(0)
