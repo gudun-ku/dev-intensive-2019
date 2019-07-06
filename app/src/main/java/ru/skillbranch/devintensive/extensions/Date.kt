@@ -53,10 +53,10 @@ fun Date.humanizeDiff(date: Date = Date()): String {
         delta / MINUTE in 46..75 && !past -> "через час"
         delta / MINUTE in 76..120 && past -> "${hoursAsPlurals(delta/ HOUR)} назад"
         delta / MINUTE in 76..120 && !past -> "через ${hoursAsPlurals(delta/ HOUR)}"
-        delta / HOUR in 2..12 && past -> "${hoursAsPlurals(delta/ HOUR)} назад"
-        delta / HOUR in 2..12 && !past -> "через ${hoursAsPlurals(delta/ HOUR)}"
-        delta / HOUR in 13..26 && past -> "день назад"
-        delta / HOUR in 13..26 && !past -> "через день"
+        delta / HOUR in 2..22 && past -> "${hoursAsPlurals(delta/ HOUR)} назад"
+        delta / HOUR in 2..22 && !past -> "через ${hoursAsPlurals(delta/ HOUR)}"
+        delta / HOUR in 23..26 && past -> "день назад"
+        delta / HOUR in 23..26 && !past -> "через день"
         delta / HOUR in 27..47 && past -> "${daysAsPlurals(delta/ DAY)} назад"
         delta / HOUR in 27..47 && !past -> "через ${daysAsPlurals(delta/ DAY)}"
         delta / DAY in 2..360 && past -> "${daysAsPlurals(delta/ DAY)} назад"
@@ -68,6 +68,48 @@ fun Date.humanizeDiff(date: Date = Date()): String {
     }
 
     return interval
+}
+
+val Long.asPlurals
+    get() = when {
+
+        this in 5L..20L -> TimePlurals.MANY
+        this % 100L in 10L..20L -> TimePlurals.MANY
+        this % 10L == 1L -> TimePlurals.ONE
+        this % 10L in 2L..4L -> TimePlurals.FEW
+
+        else -> TimePlurals.MANY
+    }
+
+
+enum class TimePlurals {
+    ONE,
+    FEW,
+    MANY
+}
+
+enum class TimeUnits {
+    SECOND,
+    MINUTE,
+    HOUR,
+    DAY,
+    YEAR;
+
+    fun plural(value: Int): String {
+        return when(this) {
+            SECOND -> secondsAsPlurals(value.toLong())
+            MINUTE -> minutesAsPlurals(value.toLong())
+            HOUR -> hoursAsPlurals(value.toLong())
+            DAY -> daysAsPlurals(value.toLong())
+            YEAR -> yearsAsPlurals(value.toLong())
+        }
+    }
+}
+
+private fun secondsAsPlurals(value: Long) = when (value.asPlurals) {
+    TimePlurals.ONE -> "$value секунду"
+    TimePlurals.FEW -> "$value секунды"
+    TimePlurals.MANY -> "$value секунд"
 }
 
 private fun minutesAsPlurals(value: Long) = when (value.asPlurals) {
@@ -94,25 +136,3 @@ private fun yearsAsPlurals(value: Long) = when (value.asPlurals) {
     TimePlurals.MANY -> "$value лет"
 }
 
-
-val Long.asPlurals
-    get() = when {
-        this in 5L..20L -> TimePlurals.MANY
-        this % 10L == 1L -> TimePlurals.ONE
-        this % 10L in 2L..4L -> TimePlurals.FEW
-        else -> TimePlurals.MANY
-    }
-
-enum class TimePlurals {
-    ONE,
-    FEW,
-    MANY
-}
-
-enum class TimeUnits {
-    SECOND,
-    MINUTE,
-    HOUR,
-    DAY,
-    YEAR
-}
