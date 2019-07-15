@@ -2,4 +2,5 @@
 <resources>
     <string name="app_name">Chat Dev-intensive</string>
     <string name="content_main_image">Bender</string>
+    <string name="content_send_icon">send</string>
 </resources>
