@@ -58,7 +58,7 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
             override fun nextQuestion(): Question = PROFESSION
 
             override fun validateAnswer(answer: String): Pair<Boolean, String?> {
-                val isValid =  answer.substring(0,1) != answer.substring(0,1).toUpperCase()
+                val isValid =  answer.substring(0,1) == answer.substring(0,1).toUpperCase()
                 val strError = if (isValid) null else "Имя должно начинаться с заглавной буквы"
                 return isValid to strError
             }
