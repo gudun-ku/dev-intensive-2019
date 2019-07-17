@@ -14,16 +14,20 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
     fun listenAnswer(answer: String) : Pair<String, Triple<Int, Int, Int>> {
         
         val isAnswerValid = question.validateAnswer(answer)
-        if (isAnswerValid.first) {
-            return if (question.answers.contains(answer)) {
-                question = question.nextQuestion()
-                "Отлично - это правильный ответ\n${question.question}" to status.color
-            } else {
-                status = status.nextStatus()
-                "Это неправильный ответ!\n${question.question}" to status.color
+        return if (isAnswerValid.first) {
+            when {
+                question.answers.isEmpty() -> question.question to status.color
+                question.answers.contains(answer.toLowerCase()) -> {
+                    question = question.nextQuestion()
+                    "Отлично - ты справился\n${question.question}" to status.color
+                }
+                else -> {
+                    status = status.nextStatus()
+                    "Это неправильный ответ\n${question.question}" to status.color
+                }
             }
         } else {
-            return "${isAnswerValid.second}\n${question.question}" to status.color
+            "${isAnswerValid.second}\n${question.question}" to status.color
         }
 
     }
@@ -76,7 +80,7 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
             override fun nextQuestion(): Question = BDAY
 
             override fun validateAnswer(answer: String): Pair<Boolean, String?> {
-                val isValid = !answer.matches("\\d+".toRegex())
+                val isValid = answer.matches("^[^0-9]+\$".toRegex())
                 val strError = if (isValid) null else "Материал не должен содержать цифр"
                 return isValid to strError
             }
