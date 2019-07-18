@@ -44,7 +44,7 @@
             android:paddingTop="@dimen/spacing_normal_16"
             android:paddingBottom="@dimen/spacing_normal_16"
             android:layout_marginLeft="@dimen/spacing_normal_16"
-            android:imeOptions="flagNoExtractUi|actionDone"
+            android:imeOptions="actionDone"
             />
 
         <ImageView

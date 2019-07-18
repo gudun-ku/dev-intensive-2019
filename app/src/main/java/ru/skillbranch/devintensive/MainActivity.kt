@@ -47,6 +47,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         textTxt.text = benderObj.askQuestion()
         sendBtn.setOnClickListener(this)
 
+        messageEt.imeOptions =  messageEt.imeOptions + EditorInfo.IME_FLAG_NO_EXTRACT_UI
         messageEt.setOnEditorActionListener{_, actionId, _ ->
             if(actionId == EditorInfo.IME_ACTION_DONE) {
                 onClick(sendBtn)
@@ -71,11 +72,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         if (v?.id == R.id.iv_send) {
             hideKeyboard()
-            val (phrase, color) = benderObj.listenAnswer(messageEt.text.toString())
-            messageEt.setText("")
-            var (r,g,b) = color
-            benderImage.setColorFilter(Color.rgb(r,g,b), PorterDuff.Mode.MULTIPLY)
-            textTxt.text = phrase
+            messageEt.text?.let {
+                val (phrase, color) = benderObj.listenAnswer(it.toString())
+                messageEt.setText("")
+                var (r, g, b) = color
+                benderImage.setColorFilter(Color.rgb(r, g, b), PorterDuff.Mode.MULTIPLY)
+                textTxt.text = phrase
+            }
         }
     }
 }

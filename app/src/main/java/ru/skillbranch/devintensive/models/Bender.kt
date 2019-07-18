@@ -23,7 +23,11 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
                 }
                 else -> {
                     status = status.nextStatus()
-                    "Это неправильный ответ\n${question.question}" to status.color
+                    if (status == Status.NORMAL) {
+                        question = Question.NAME
+                        "Это неправильный ответ. Давай все по новой\n${question.question}" to status.color
+                    } else
+                        "Это неправильный ответ\n${question.question}" to status.color
                 }
             }
         } else {
@@ -62,7 +66,7 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
             override fun nextQuestion(): Question = PROFESSION
 
             override fun validateAnswer(answer: String): Pair<Boolean, String?> {
-                val isValid =  answer.substring(0,1) == answer.substring(0,1).toUpperCase()
+                val isValid =  if (answer.isNotEmpty()) answer.substring(0,1) == answer.substring(0,1).toUpperCase() else false
                 val strError = if (isValid) null else "Имя должно начинаться с заглавной буквы"
                 return isValid to strError
             }
@@ -71,7 +75,7 @@ class Bender(var status: Status = Status.NORMAL, var question:Question = Questio
             override fun nextQuestion(): Question = MATERIAL
 
             override fun validateAnswer(answer: String): Pair<Boolean, String?> {
-                val isValid =  answer.substring(0,1) == answer.substring(0,1).toLowerCase()
+                val isValid =  if (answer.isNotEmpty()) answer.substring(0,1) == answer.substring(0,1).toLowerCase() else false
                 val strError = if (isValid) null else "Профессия должна начинаться со строчной буквы"
                 return isValid to strError
             }
