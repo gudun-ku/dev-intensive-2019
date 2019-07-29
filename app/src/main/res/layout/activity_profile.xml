@@ -212,7 +212,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp" android:contentDescription="@string/cd_icon_about"/>
     <com.google.android.material.textfield.TextInputLayout
-
+        android:id="@+id/wr_about"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
@@ -222,7 +222,7 @@
         android:layout_marginEnd="16dp"
         app:counterEnabled="false"
         app:counterMaxLength="128"
-        android:id="@+id/wr_about">
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_about"
@@ -260,7 +260,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:id="@+id/textInputLayout4"
+        android:id="@+id/wr_repository"
         app:layout_constraintEnd_toStartOf="@+id/ic_eye"
         app:layout_constraintHorizontal_bias="0.5">
 
@@ -277,11 +277,11 @@
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/ic_eye_24dp"
         android:id="@+id/ic_eye"
-        app:layout_constraintTop_toTopOf="@+id/textInputLayout4"
-        app:layout_constraintBottom_toBottomOf="@+id/textInputLayout4"
+        app:layout_constraintTop_toTopOf="@+id/wr_repository"
+        app:layout_constraintBottom_toBottomOf="@+id/wr_repository"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout4"
+        app:layout_constraintStart_toEndOf="@+id/wr_repository"
         app:layout_constraintHorizontal_bias="0.5"
         android:contentDescription="@string/cd_icon_eye"/>
 
