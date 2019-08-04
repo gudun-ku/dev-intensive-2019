@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.utils
 
+import android.content.res.Resources
 
 
 object Utils {
@@ -129,5 +130,9 @@ object Utils {
                 sb.toString()
             }
         }
+    }
+
+    fun convertDpToPx(dp: Float): Int{
+        return  (dp * Resources.getSystem().displayMetrics.density).toInt()
     }
 }
