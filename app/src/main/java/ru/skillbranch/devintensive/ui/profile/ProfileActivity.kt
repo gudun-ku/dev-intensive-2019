@@ -5,6 +5,8 @@ import android.graphics.PorterDuff
 import android.graphics.PorterDuffColorFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.activity_profile.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.Profile
+import ru.skillbranch.devintensive.utils.Utils
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 class ProfileActivity : AppCompatActivity() {
@@ -27,6 +30,7 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_profile)
         initViews(savedInstanceState)
         initViewModel()
@@ -41,6 +45,7 @@ class ProfileActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
         viewModel.getProfileData().observe(this, Observer { updateUi(it) })
         viewModel.getTheme().observe(this, Observer { updateTheme(it) })
+        viewModel.getDefaultDrawable().observe(this, Observer { iv_avatar.setImageDrawable(it) })
     }
 
     private fun updateTheme(mode: Int) {
@@ -83,6 +88,19 @@ class ProfileActivity : AppCompatActivity() {
             viewModel.switchTheme()
         }
 
+        et_repository.addTextChangedListener(object: TextWatcher {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (Utils.isGithubUrlValid(s.toString())) {
+                    wr_repository.error = null
+                    wr_repository.isErrorEnabled = false
+                } else {
+                    wr_repository.error = "Невалидный адрес репозитория"
+                }
+            }
+            override fun afterTextChanged(s: Editable?) {}
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        })
+
     }
 
     private fun showCurrentMode(isEdit: Boolean) {
@@ -124,11 +142,19 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun saveProfileInfo() {
+
+        val repositoryAddress = if(Utils.isGithubUrlValid(et_repository.text.toString())) {
+            et_repository.text.toString()
+        } else {
+            et_repository.setText("")
+            ""
+        }
+
         Profile(
                 firstName = et_first_name.text.toString(),
                 lastName = et_last_name.text.toString(),
                 about = et_about.text.toString(),
-                repository = et_repository.text.toString()
+                repository = repositoryAddress
         ).apply {
             viewModel.saveProfileData(this)
         }

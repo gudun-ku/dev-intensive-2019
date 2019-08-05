@@ -28,42 +28,40 @@ class CircleImageView @JvmOverloads constructor(
 
 
     companion object {
-        private const val DEFAULT_BORDER_WIDTH = 2.0f
+        private const val DEFAULT_BORDER_WIDTH = 2
         private const val DEFAULT_BORDER_COLOR = Color.WHITE
     }
 
     private var image: Bitmap? = null
+    private var civDrawable: Drawable? = null
     private lateinit var clipPath: Path
     private lateinit var imagePaint: Paint
     private lateinit var borderPaint: Paint
     private lateinit var imageBounds: RectF
     private lateinit var borderBounds: RectF
-    private lateinit var textBounds: RectF
-    private lateinit var textPaint: Paint
 
     private lateinit var bitmapShader: Shader
     private var shaderMatrix = Matrix()
     private var initialized = false
 
 
-    var initials: String? = null
 
 
 
-    private var borderWidth = Utils.convertDpToPx(DEFAULT_BORDER_WIDTH)
-    private var borderColor =  DEFAULT_BORDER_COLOR
+    private var borderWidth =   DEFAULT_BORDER_WIDTH
+    private var borderColor =   DEFAULT_BORDER_COLOR
 
-    private var imageResId = -1
+    private var xmlImageResId = -1
 
     init {
         if(attrs!= null) {
 
 
-            imageResId = attrs.getAttributeResourceValue("http://schemas.android.com/apk/res/android",
+            xmlImageResId = attrs.getAttributeResourceValue("http://schemas.android.com/apk/res/android",
                 "src", -1)
             val a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView)
             borderWidth = a.getDimensionPixelSize(R.styleable.CircleImageView_cv_borderWidth,
-                Utils.convertDpToPx(DEFAULT_BORDER_WIDTH))
+               DEFAULT_BORDER_WIDTH)
             borderColor = a.getColor(R.styleable.CircleImageView_cv_borderColor, DEFAULT_BORDER_COLOR)
             a.recycle()
         }
@@ -77,22 +75,20 @@ class CircleImageView @JvmOverloads constructor(
         borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
             color = borderColor
             style = Paint.Style.STROKE
-            strokeWidth = context.convertDpToPx(borderWidth.toFloat())
-        }
-
-        textPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = Color.WHITE
-
-            textSize = 22f
-            isFakeBoldText = true
-            style = Paint.Style.FILL
-            textAlign = Paint.Align.CENTER
-
+            strokeWidth = Utils.convertDpToPx(borderWidth.toFloat()).toFloat()
         }
 
         initialized = true
         setupImage()
 
+    }
+
+    private fun loadDrawable() {
+        if (civDrawable == drawable) return
+
+        civDrawable = drawable
+        image = getBitmapFromDrawable(civDrawable)
+        updateImageSize()
     }
 
     override fun setImageResource(resId: Int) {
@@ -149,9 +145,6 @@ class CircleImageView @JvmOverloads constructor(
        canvas.drawOval(imageBounds,imagePaint)
     }
 
-    private fun drawText(canvas: Canvas, text: String) {
-        canvas.drawText(text, 0f,0f,textPaint)
-    }
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
@@ -161,8 +154,6 @@ class CircleImageView @JvmOverloads constructor(
         borderBounds.set(imageBounds)
         borderBounds.inset(strokeWidth ,strokeWidth)
         updateImageSize()
-
-
     }
 
     private fun updateCircleDrawBounds(bounds: RectF) {
@@ -184,9 +175,18 @@ class CircleImageView @JvmOverloads constructor(
     private fun setupImage() {
         if (!initialized) return
 
-        if (imageResId == 0) return
+        if (civDrawable == drawable) return
 
-        image = getBitmapFromDrawable(AppCompatResources.getDrawable(context,imageResId))
+        if (civDrawable != null) {
+            civDrawable = drawable
+            image = getBitmapFromDrawable(civDrawable)
+
+        } else {
+            if (xmlImageResId == 0) return
+            civDrawable = AppCompatResources.getDrawable(context,xmlImageResId)
+            image = getBitmapFromDrawable(civDrawable)
+        }
+
         if (image == null) return
 
         bitmapShader = BitmapShader(image, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
@@ -197,7 +197,6 @@ class CircleImageView @JvmOverloads constructor(
 
     private fun getBitmapFromDrawable(drawable:Drawable?):Bitmap? {
         if (drawable == null) return null
-
 
         return when (drawable) {
             is BitmapDrawable -> drawable.bitmap
@@ -245,7 +244,5 @@ class CircleImageView @JvmOverloads constructor(
 
         drawImage(canvas)
         drawBorder(canvas)
-        //drawText(canvas,"AB")
-
     }
 }

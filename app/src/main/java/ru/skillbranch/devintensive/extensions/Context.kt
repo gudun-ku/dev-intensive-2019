@@ -2,6 +2,9 @@ package ru.skillbranch.devintensive.extensions
 
 import android.content.Context
 import android.util.TypedValue
+import android.R
+
+
 
 fun Context.convertDpToPx(dp: Float): Float {
     return TypedValue.applyDimension(
@@ -10,3 +13,11 @@ fun Context.convertDpToPx(dp: Float): Float {
             this.resources.displayMetrics
     )
 }
+
+fun Context.colorFromAttribute(attribute: Int): Int {
+    val value = TypedValue()
+    val theme = this.theme
+    theme.resolveAttribute(attribute, value, true)
+    return value.data
+}
+
