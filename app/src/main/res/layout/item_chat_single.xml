@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_size" xmlns:tools="http://schemas.android.com/tools"
+        android:padding="@dimen/spacing_normal_16"
+>
+    <ru.skillbranch.devintensive.ui.custom.AvatarImageView
+           android:id="@+id/avatar_single"
+           android:layout_width="@dimen/btn_round_size_40"
+           android:layout_height="@dimen/btn_round_size_40"
+           alignParentLeft="true" />
+    <TextView
+            android:id="@+id/tv_title_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="chat title"
+            android:textColor="@color/color_primary"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/avatar_single"
+            android:layout_marginLeft="@dimen/spacing_normal_16"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+    />
+    <TextView
+            android:id="@+id/tv_message_single"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Когда я проходил интенсив я много пил и мало спал"
+            android:textColor="@color/color_gray_dark"
+            android:fontFamily="sans-serif-medium"
+            android:textSize="14sp"
+            android:layout_toRightOf="@id/avatar_single"
+            android:layout_toLeftOf="@id/counter_single"
+            android:layout_below="@id/tv_title_single"
+            android:layout_marginLeft="@dimen/spacing_normal_16"
+            android:layout_marginRight="@dimen/spacing_normal_16"
+    />
+    <TextView
+            android:id="@+id/tv_date_single"
+            android:text="10sp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/color_gray_dark"
+            tools:text="18:00"
+    />
+    <TextView
+            android:id="@+id/counter_single"
+            android:text="10sp"
+            android:minWidth="@dimen/counter_size"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:paddingLeft="@dimen/spacing_tiny_4"
+            android:paddingRight="@dimen/spacing_tiny_4"
+            android:textColor="@android:color/white"
+            tools:text="11"
+            android:background="@drawable/bg_counter"
+
+
+
+    />
+
+
+
+</RelativeLayout>

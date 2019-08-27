@@ -5,7 +5,6 @@ import android.graphics.*
 import android.util.AttributeSet
 import android.widget.ImageView
 import ru.skillbranch.devintensive.R
-import android.text.TextPaint
 import androidx.annotation.ColorRes
 import androidx.annotation.Dimension
 import android.graphics.RectF
@@ -15,11 +14,10 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.content.res.AppCompatResources
-import ru.skillbranch.devintensive.extensions.convertDpToPx
 import ru.skillbranch.devintensive.utils.Utils
 
 
-class CircleImageView @JvmOverloads constructor(
+open class CircleImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
