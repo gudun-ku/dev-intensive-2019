@@ -1,12 +1,16 @@
 package ru.skillbranch.devintensive.ui.main
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,15 +20,22 @@ class MainActivity : AppCompatActivity() {
         initViewModel()
     }
 
-    private fun initViewModel() {
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+    private fun initToolbar() {
+        setSupportActionBar(toolbar)
     }
 
     private fun initViews() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        with(rv_chat_list) {
+            adapter = chatAdapter
+            layoutManager = LinearLayoutManager(this@MainActivity)
+        }
     }
 
-    private fun initToolbar() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+    private fun initViewModel() {
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.getChatData()
     }
+
+
 }
