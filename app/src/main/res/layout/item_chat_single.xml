@@ -10,8 +10,7 @@
             android:id="@+id/iv_avatar_single"
             android:layout_width="@dimen/btn_round_size_40"
             android:layout_height="@dimen/btn_round_size_40"
-            app:cv_borderWidth="@dimen/spacing_tiny_4"
-            app:cv_borderColor="?attr/colorAccent"
+            app:cv_borderWidth="0dp"
             alignParentLeft="true" />
     <TextView
             android:id="@+id/tv_title_single"
@@ -34,7 +33,7 @@
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_single"
-            android:layout_toLeftOf="@id/counter_single"
+            android:layout_toLeftOf="@id/tv_counter_single"
             android:layout_below="@id/tv_title_single"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"

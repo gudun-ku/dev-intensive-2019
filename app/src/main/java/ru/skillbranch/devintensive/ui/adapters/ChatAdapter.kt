@@ -11,7 +11,7 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.ChatItem
 
 
-class ChatAdapter: RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
+class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
 
     var items: List<ChatItem> = listOf()
 
@@ -26,7 +26,7 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
 
     override fun onBindViewHolder(holder: SingleViewHolder, position: Int) {
         Log.d("M_ChatAdapter", "onBindViewHolder")
-        holder.bind(items[position])
+        holder.bind(items[position], listener)
 
     }
 
@@ -39,9 +39,9 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
         override val containerView: View?
             get() = itemView
 
-        fun bind(item: ChatItem) {
+        fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
            if (item.avatar == null) {
-               //iv_avatar_single.setInitials(item.initials)
+               iv_avatar_single.setInitials(item.initials)
            }else {
                //TODO set avatar drawable
            }
@@ -55,7 +55,11 @@ class ChatAdapter: RecyclerView.Adapter<ChatAdapter.SingleViewHolder>() {
                visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                text = item.messageCount.toString()
            }
-           tv_title_single.text = item.shortDescription
+           tv_title_single.text = item.title
+           tv_message_single.text = item.shortDescription
+           itemView.setOnClickListener{
+               listener.invoke(item)
+           }
         }
 
     }

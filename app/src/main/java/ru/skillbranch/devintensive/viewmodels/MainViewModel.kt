@@ -17,7 +17,7 @@ class MainViewModel : ViewModel(){
     private fun loadChats(): List<ChatItem>? {
         val chats = chatRepository.loadChats()
         return chats.map{
-            it.toChatItem
+            it.toChatItem()
         }
     }
 }
