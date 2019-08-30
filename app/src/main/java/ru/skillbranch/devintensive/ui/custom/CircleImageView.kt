@@ -81,6 +81,14 @@ open class CircleImageView @JvmOverloads constructor(
 
     }
 
+    fun loadImageDrawable(drawable: Drawable?) {
+        if (civDrawable == drawable) return
+
+        civDrawable = drawable
+        image = getBitmapFromDrawable(civDrawable)
+        setupImage()
+    }
+
     private fun loadDrawable() {
         if (civDrawable == drawable) return
 

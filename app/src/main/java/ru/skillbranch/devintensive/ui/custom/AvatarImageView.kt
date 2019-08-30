@@ -23,7 +23,7 @@ open class AvatarImageView @JvmOverloads constructor(
 
         userDrawable = makeInitialsDrawable(initials)
         if (userDrawable != null) {
-            this.setImageDrawable(userDrawable)
+            super.loadImageDrawable(userDrawable)
         }
 
     }
