@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
+import ru.skillbranch.devintensive.utils.ColorHash
 import ru.skillbranch.devintensive.utils.Utils
 
 
@@ -17,15 +18,9 @@ open class AvatarImageView @JvmOverloads constructor(
 
 ): CircleImageView (context, attrs, defStyleAttr) {
 
-    var userDrawable: Drawable? = null
 
     fun setInitials(initials: String) {
-
-        userDrawable = makeInitialsDrawable(initials)
-        if (userDrawable != null) {
-            super.loadImageDrawable(userDrawable)
-        }
-
+        setImageDrawable(makeInitialsDrawable(initials))
     }
 
     //TODO - here need to make measurements
@@ -36,8 +31,8 @@ open class AvatarImageView @JvmOverloads constructor(
             .beginConfig()
             .width(App.applicationContext().resources.getDimension(R.dimen.btn_round_size_40).toInt())
             .height(App.applicationContext().resources.getDimension(R.dimen.btn_round_size_40).toInt())
-            .fontSize(Utils.convertSpToPx(20f))
+            .fontSize(Utils.convertSpToPx(16f))
             .endConfig()
-            .buildRound(initials, Color.WHITE)
+            .buildRound(initials,ColorHash.getColor(initials))
     }
 }

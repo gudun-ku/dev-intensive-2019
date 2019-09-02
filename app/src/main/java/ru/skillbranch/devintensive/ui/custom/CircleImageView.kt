@@ -183,12 +183,12 @@ open class CircleImageView @JvmOverloads constructor(
 
         if (civDrawable == drawable) return
 
-        if (civDrawable != null) {
+        if (drawable != null) {
             civDrawable = drawable
             image = getBitmapFromDrawable(civDrawable)
 
         } else {
-            if (xmlImageResId == 0) return
+            if (xmlImageResId <= 0) return
             civDrawable = AppCompatResources.getDrawable(context,xmlImageResId)
             image = getBitmapFromDrawable(civDrawable)
         }

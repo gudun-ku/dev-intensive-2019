@@ -1,6 +1,7 @@
 package ru.skillbranch.devintensive.utils
 
 import android.content.res.Resources
+import java.lang.Integer.parseInt
 
 object Utils {
 
@@ -181,4 +182,5 @@ object Utils {
 
         return url == "" || (validAddress(address) && validUserName(username))
     }
+
 }
