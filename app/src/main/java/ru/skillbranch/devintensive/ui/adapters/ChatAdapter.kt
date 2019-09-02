@@ -1,10 +1,12 @@
 package ru.skillbranch.devintensive.ui.adapters
 
+import android.graphics.Color
 import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_chat_single.*
@@ -32,11 +34,30 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
     }
 
     fun updateData(data: List<ChatItem>) {
+
+        Log.d("M_ChatAdapter", "Update data adapter - new data ${data.size} hash: ${data.hashCode()}" +
+            "old data ${items.size} hash: ${items.hashCode()}")
+
+        val diffCallBack = object : DiffUtil.Callback() {
+            override fun areItemsTheSame(oldPos: Int, newPos: Int): Boolean =
+                items[oldPos].id == data[newPos].id
+
+            override fun areContentsTheSame(oldPos: Int, newPos: Int): Boolean =
+                items[oldPos].hashCode() == data[newPos].hashCode()
+
+            override fun getOldListSize(): Int = items.size
+
+            override fun getNewListSize(): Int = data.size
+        }
+
+        val diffResult = DiffUtil.calculateDiff(diffCallBack)
+
         items = data
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 
-    inner class SingleViewHolder(convertView: View): RecyclerView.ViewHolder(convertView), LayoutContainer {
+    inner class SingleViewHolder(convertView: View): RecyclerView.ViewHolder(convertView), LayoutContainer,
+    ItemTouchViewHolder {
         override val containerView: View?
             get() = itemView
 
@@ -45,7 +66,8 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
                iv_avatar_single.setInitials(item.initials)
            }else {
                //TODO set avatar drawable
-               iv_avatar_single.setImageURI(Uri.parse(item.avatar))
+               //iv_avatar_single.setImageURI(Uri.parse(item.avatar))
+               iv_avatar_single.setInitials("??")
            }
            sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
            with(tv_date_single) {
@@ -59,10 +81,19 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
            }
            tv_title_single.text = item.title
            tv_message_single.text = item.shortDescription
+
            itemView.setOnClickListener{
                listener.invoke(item)
            }
         }
 
+        //Item touch viewholder methods
+        override fun onItemSelected() {
+            itemView.setBackgroundColor(Color.LTGRAY)
+        }
+
+        override fun onItemCleared() {
+            itemView.setBackgroundColor(Color.WHITE)
+        }
     }
 }
