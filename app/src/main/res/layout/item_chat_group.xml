@@ -12,6 +12,7 @@
             android:layout_width="@dimen/btn_round_size_40"
             android:layout_height="@dimen/btn_round_size_40"
             app:cv_borderWidth="0dp"
+            android:layout_marginRight="@dimen/spacing_normal_16"
             alignParentLeft="true" />
     <TextView
             android:id="@+id/tv_title_group"
@@ -22,7 +23,7 @@
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_group"
-            android:layout_marginLeft="@dimen/spacing_normal_16"
+            android:layout_toLeftOf="@+id/tv_date_group"
             android:layout_marginRight="@dimen/spacing_normal_16"
             android:maxLines="1"
     />
@@ -36,7 +37,6 @@
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_group"
             android:layout_below="@id/tv_title_group"
-            android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_tiny_4"
     />
     <TextView
@@ -50,18 +50,9 @@
             android:layout_toRightOf="@id/tv_message_author"
             android:layout_toLeftOf="@id/tv_counter_group"
             android:layout_below="@id/tv_title_group"
-            android:layout_marginLeft="@dimen/spacing_tiny_4"
             android:layout_marginRight="@dimen/spacing_normal_16"
     />
 
-    <View
-            android:id="@+id/sv_indicator"
-            android:layout_width="12dp"
-            android:layout_height="12dp"
-            android:background="@drawable/bg_indicator"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/tv_title_group"
-    />
     <TextView
             android:id="@+id/tv_date_group"
             android:text="10sp"

@@ -14,7 +14,7 @@
             app:cv_borderWidth="0dp"
             alignParentLeft="true" />
     <TextView
-            android:id="@+id/tv_title_group"
+            android:id="@+id/tv_title_single"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="chat title"
@@ -26,8 +26,8 @@
             android:layout_marginRight="@dimen/spacing_normal_16"
     />
     <TextView
-            android:id="@+id/tv_message_author"
-            android:layout_width="match_parent"
+            android:id="@+id/tv_message_single"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Когда я проходил интенсив я много пил и мало спал"
             android:textColor="@color/color_gray_dark"
@@ -35,7 +35,7 @@
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_single"
             android:layout_toLeftOf="@id/tv_counter_single"
-            android:layout_below="@id/tv_title_group"
+            android:layout_below="@id/tv_title_single"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"
     />
@@ -45,7 +45,7 @@
             android:layout_height="12dp"
             android:background="@drawable/bg_indicator"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@+id/tv_title_group"
+            android:layout_toLeftOf="@+id/tv_title_single"
     />
     <TextView
             android:id="@+id/tv_date_single"
