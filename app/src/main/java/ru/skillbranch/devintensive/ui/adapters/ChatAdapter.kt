@@ -62,19 +62,19 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
 
         fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
            if (item.avatar == null) {
-               iv_avatar_group.setInitials(item.initials)
+               iv_avatar_single.setInitials(item.initials)
            }else {
                //TODO set avatar drawable
                //iv_avatar_single.setImageURI(Uri.parse(item.avatar))
-               iv_avatar_group.setInitials("??")
+               iv_avatar_single.setInitials("??")
            }
            sv_indicator.visibility = if (item.isOnline) View.VISIBLE else View.GONE
-           with(tv_date_group) {
+           with(tv_date_single) {
                visibility = if (item.lastMessageDate != null) View.VISIBLE else View.GONE
                text = item.lastMessageDate
            }
 
-           with(tv_counter_group) {
+           with(tv_counter_single) {
                visibility = if (item.messageCount > 0) View.VISIBLE else View.GONE
                text = item.messageCount.toString()
            }

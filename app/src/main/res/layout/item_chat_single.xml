@@ -8,7 +8,7 @@
         android:background="@android:color/white"
 >
     <ru.skillbranch.devintensive.ui.custom.AvatarImageView
-            android:id="@+id/iv_avatar_group"
+            android:id="@+id/iv_avatar_single"
             android:layout_width="@dimen/btn_round_size_40"
             android:layout_height="@dimen/btn_round_size_40"
             app:cv_borderWidth="0dp"
@@ -21,7 +21,7 @@
             android:textColor="@color/color_primary"
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
-            android:layout_toRightOf="@id/iv_avatar_group"
+            android:layout_toRightOf="@id/iv_avatar_single"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"
     />
@@ -33,8 +33,8 @@
             android:textColor="@color/color_gray_dark"
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
-            android:layout_toRightOf="@id/iv_avatar_group"
-            android:layout_toLeftOf="@id/tv_counter_group"
+            android:layout_toRightOf="@id/iv_avatar_single"
+            android:layout_toLeftOf="@id/tv_counter_single"
             android:layout_below="@id/tv_title_group"
             android:layout_marginLeft="@dimen/spacing_normal_16"
             android:layout_marginRight="@dimen/spacing_normal_16"
@@ -48,7 +48,7 @@
             android:layout_toLeftOf="@+id/tv_title_group"
     />
     <TextView
-            android:id="@+id/tv_date_group"
+            android:id="@+id/tv_date_single"
             android:text="10sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
@@ -58,7 +58,7 @@
             tools:text="18:00"
     />
     <TextView
-            android:id="@+id/tv_counter_group"
+            android:id="@+id/tv_counter_single"
             android:text="10sp"
             android:minWidth="@dimen/counter_size"
             android:layout_width="wrap_content"
@@ -71,11 +71,6 @@
             android:textColor="@android:color/white"
             tools:text="131"
             android:background="@drawable/bg_counter"
-
-
-
     />
-
-
 
 </RelativeLayout>

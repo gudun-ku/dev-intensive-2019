@@ -20,7 +20,11 @@ open class AvatarImageView @JvmOverloads constructor(
 
 
     fun setInitials(initials: String) {
-        setImageDrawable(makeInitialsDrawable(initials))
+        if (initials.isNullOrBlank()) {
+            setImageDrawable(makeInitialsDrawable("??"))
+        } else {
+            setImageDrawable(makeInitialsDrawable(initials))
+        }
     }
 
     //TODO - here need to make measurements
@@ -33,6 +37,6 @@ open class AvatarImageView @JvmOverloads constructor(
             .height(App.applicationContext().resources.getDimension(R.dimen.btn_round_size_40).toInt())
             .fontSize(Utils.convertSpToPx(16f))
             .endConfig()
-            .buildRound(initials,ColorHash.getColor(initials))
+            .buildRound(initials ,ColorHash.getColor(initials))
     }
 }
