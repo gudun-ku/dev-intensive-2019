@@ -52,7 +52,7 @@
 
     />
     <TextView
-            android:id="@+id/tv_user_activity"
+            android:id="@+id/tv_last_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="online"

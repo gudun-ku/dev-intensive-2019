@@ -1,5 +1,6 @@
 package ru.skillbranch.devintensive.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -7,11 +8,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
+import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -54,7 +58,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         fab.setOnClickListener {
-            //viewModel.addItems()
+            val intent = Intent(this, GroupActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -63,6 +68,5 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it)})
     }
-
 
 }
