@@ -30,8 +30,8 @@ data class Chat(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     fun lastMessageShort(): Pair<String, String?> = when(val lastMessage = messages.lastOrNull()){
        //TODO implement me
-       null -> "" to null
-       else -> lastMessage.id to ""
+       null -> "Сообщений еще нет" to "@John_Doe"
+       else -> lastMessage.id to lastMessage.from.toString()
     }
 
     private fun isSingle(): Boolean = members.size == 1
