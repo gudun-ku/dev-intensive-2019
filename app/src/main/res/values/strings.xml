@@ -15,4 +15,5 @@
     <string name="cd_icon_about">about icon</string>
     <string name="cd_icon_repo">repo icon</string>
     <string name="cd_icon_eye">eye icon</string>
+    <string name="menu_search_title">Поиск</string>
 </resources>
