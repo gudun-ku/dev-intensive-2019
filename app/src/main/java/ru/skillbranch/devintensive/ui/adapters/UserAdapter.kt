@@ -40,8 +40,8 @@ class UserAdapter(val listener: (UserItem) -> Unit):RecyclerView.Adapter<UserAda
         }
 
         val diffResult = DiffUtil.calculateDiff(diffCallBack)
-
         items = data
+        diffResult.dispatchUpdatesTo(this)
 
     }
 
