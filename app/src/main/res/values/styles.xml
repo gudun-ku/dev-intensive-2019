@@ -62,4 +62,12 @@
         <item name="android:windowBackground">@drawable/ic_splash</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+    </style>
+
 </resources>
