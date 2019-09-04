@@ -13,7 +13,13 @@
         <item name="colorDivider">@color/color_divider_dark</item>
         <item name="android:windowBackground">@android:color/white</item>
 
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
+
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="AppTheme.PopupOverlay" parent="Theme.MaterialComponents.Light" />
 
 
 
