@@ -54,10 +54,11 @@ data class Chat(
                 user.isOnline
             )
         } else {
+            val user = members.first()
             ChatItem(
                 id,
                 null,
-                "",
+                Utils.toInitials(user.firstName, null) ?: "??",
                 title,
                 lastMessageShort().first,
                 messages.count(), //unreadableMessageCount(),

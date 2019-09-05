@@ -1,7 +1,8 @@
 package ru.skillbranch.devintensive.utils
 
 import android.content.res.Resources
-import java.lang.Integer.parseInt
+import ru.skillbranch.devintensive.extensions.toBytesArray
+import kotlin.math.absoluteValue
 
 object Utils {
 
@@ -181,6 +182,32 @@ object Utils {
         }
 
         return url == "" || (validAddress(address) && validUserName(username))
+    }
+
+    fun interpolateColor(width: Int, dX: Float, initialColor: Int, finishColor: Int): Int {
+        val initialColorBytes = initialColor.toBytesArray()
+        val initialOpaque = initialColorBytes[3]
+        val initialRed = initialColorBytes[2]
+        val initialGreen = initialColorBytes[1]
+        val initialBlue = initialColorBytes[0]
+
+        val finishColorBytes = finishColor.toBytesArray()
+        val finishOpaque = finishColorBytes[3]
+        val finishRed = finishColorBytes[2]
+        val finishGreen = finishColorBytes[1]
+        val finishBlue = finishColorBytes[0]
+
+        val currentOpaque = initialOpaque + (finishOpaque - initialOpaque)*(dX.absoluteValue/width.toFloat()).toInt()
+        val currentRed = initialRed + (finishRed - initialRed)*(dX.absoluteValue/width.toFloat()).toInt()
+        val currentGreen = initialGreen + (finishGreen - initialGreen)*(dX.absoluteValue/width.toFloat()).toInt()
+        val currentBlue = initialBlue + (finishBlue - initialBlue)*(dX.absoluteValue/width.toFloat()).toInt()
+
+        val currentColor = currentBlue or
+                ((currentGreen shl 8) and 0x0000FF00) or
+                ((currentRed shl 16) and 0x00FF0000) or
+                ((currentOpaque shl 24).toLong() and 0xFF000000L).toInt()
+
+        return currentColor
     }
 
 }
