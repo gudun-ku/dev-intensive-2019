@@ -66,6 +66,7 @@ class GroupActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+        supportActionBar?.title = "Создание группы"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

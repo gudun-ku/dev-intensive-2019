@@ -40,8 +40,9 @@ class MainActivity : AppCompatActivity() {
     private fun initViews() {
 
         chatAdapter = ChatAdapter{
-            val snackbar = Snackbar.make(rv_chat_list, "Click on ${it.title}", Snackbar.LENGTH_LONG)
-            snackbar.setAction("UNDO") {
+            val snackbar = Snackbar.make(rv_chat_list, "Кликнули на ${it.title}", Snackbar.LENGTH_LONG)
+            snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+            snackbar.setAction("ОТМЕНА") {
                 snackbar.dismiss()
             }
             snackbar.show()
@@ -52,12 +53,12 @@ class MainActivity : AppCompatActivity() {
         val touchCallBack = ChatItemTouchHelperCallback(chatAdapter) { chatItem ->
             viewModel.addToArchive(chatItem.id)
             val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив? ", Snackbar.LENGTH_LONG)
-            snackbar.setAction("НЕТ") {
+            snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+            snackbar.setAction("ОТМЕНА") {
                 viewModel.restoreFromArchive(chatItem.id)
                 snackbar.dismiss()
             }
             snackbar.show()
-
         }
 
         val touchHelper = ItemTouchHelper(touchCallBack)
