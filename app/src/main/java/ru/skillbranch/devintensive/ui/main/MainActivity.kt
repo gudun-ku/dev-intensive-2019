@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         val touchCallBack = ChatItemTouchHelperCallback(chatAdapter) { chatItem ->
             viewModel.addToArchive(chatItem.id)
-            val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив? ", Snackbar.LENGTH_LONG)
+            val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив?", Snackbar.LENGTH_LONG)
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
             snackbar.setAction("ОТМЕНА") {
                 viewModel.restoreFromArchive(chatItem.id)
