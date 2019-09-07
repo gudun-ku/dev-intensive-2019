@@ -18,16 +18,16 @@ import kotlinx.android.synthetic.main.activity_group.*
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
+import ru.skillbranch.devintensive.ui.base.BaseActivity
 import ru.skillbranch.devintensive.viewmodels.GroupViewModel
 
-class GroupActivity : AppCompatActivity() {
+class GroupActivity : BaseActivity() {
 
     private lateinit var usersAdapter: UserAdapter
     private lateinit var viewModel: GroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_group)
         initToolbar()
         initViews()

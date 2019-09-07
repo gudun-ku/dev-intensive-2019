@@ -92,7 +92,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(R.attr.colorBackgroundFloating)
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
@@ -134,7 +134,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(R.attr.colorBackgroundFloating)
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
