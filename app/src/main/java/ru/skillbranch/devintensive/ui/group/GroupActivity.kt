@@ -108,7 +108,7 @@ class GroupActivity : BaseActivity() {
             tag = user.id
             isClickable = true
             closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            chipBackgroundColor = ColorStateList.valueOf(getColor(R.color.color_primary_light))
+            chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.color_primary_light,theme))
             setTextColor(Color.WHITE)
         }
 

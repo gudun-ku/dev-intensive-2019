@@ -5,7 +5,7 @@
         android:layout_height="@dimen/item_size" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:padding="@dimen/spacing_normal_16"
-        android:background="?attr/colorBackgroundFloating"
+        android:background="?attr/cardBackgroundColor"
 >
     <ru.skillbranch.devintensive.ui.custom.AvatarImageView
             android:id="@+id/iv_avatar_single"
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:text="chat title"
-            android:textColor="?attr/colorPrimary"
+            android:textColor="?attr/colorIcon"
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_single"
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="Когда я проходил интенсив я много пил и мало спал"
-            android:textColor="@color/color_gray_dark"
+            android:textColor="@color/color_gray"
             android:fontFamily="sans-serif-medium"
             android:textSize="14sp"
             android:layout_toRightOf="@id/iv_avatar_single"

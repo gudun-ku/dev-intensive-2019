@@ -12,6 +12,8 @@
 
     <color name="color_divider_dark">#1F000000</color>
     <color name="color_divider_light">#1FFFFFFF</color>
+    <color name="color_primary_night">#272727</color>
+    <color name="color_primary_dark_night">#1D1D1d</color>
 
     <color name="color_indicator">#473770</color>
     <color name="color_green">#3AA43F</color>

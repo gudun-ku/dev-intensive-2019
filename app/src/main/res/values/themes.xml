@@ -9,9 +9,12 @@
         <item name="colorAccent">@color/color_accent</item>
 
         <item name="colorAccentedSurface">@color/color_primary_light</item>
-        <item name="colorIcon">@color/color_gray</item>
+        <item name="colorIcon">@color/color_primary</item>
         <item name="colorDivider">@color/color_divider_dark</item>
-        <item name="android:windowBackground">@android:color/white</item>
+        <item name="colorSecondary">@color/color_primary</item>
+        <item name="cardBackgroundColor">@android:color/white</item>
+
+
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
