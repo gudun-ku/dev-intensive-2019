@@ -12,7 +12,8 @@
         <item name="colorIcon">@color/color_primary</item>
         <item name="colorDivider">@color/color_divider_dark</item>
         <item name="colorSecondary">@color/color_primary</item>
-        <item name="cardBackgroundColor">@android:color/white</item>
+        <item name="colorBackground">@android:color/white</item>
+        <item name="colorIndicator">@android:color/holo_green_light</item>
 
 
 

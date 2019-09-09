@@ -8,6 +8,7 @@ import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.utils.Utils.interpolateColor
 
@@ -105,8 +106,8 @@ class ChatItemTouchHelperCallback(
             color = interpolateColor(
                 itemView.width,
                 dX,
-                itemView.resources.getColor(R.color.color_primary_dark, itemView.context.theme),
-                itemView.resources.getColor(R.color.color_accent, itemView.context.theme)
+                itemView.context.colorFromAttribute(R.attr.colorPrimaryDark),
+                itemView.context.colorFromAttribute(R.attr.colorAccent)
             )
         }
 

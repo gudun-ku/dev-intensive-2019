@@ -5,7 +5,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:padding="@dimen/spacing_normal_16"
-                android:background="?attr/colorBackgroundFloating"
+                android:background="?attr/colorBackground"
 >
     <ImageView
             android:id="@+id/iv_selected"

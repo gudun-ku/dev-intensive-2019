@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.item_chat_group.*
 import kotlinx.android.synthetic.main.item_chat_single.*
 import kotlinx.android.synthetic.main.item_chat_single.sv_indicator
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.extensions.truncate
 import ru.skillbranch.devintensive.models.data.ChatItem
 import ru.skillbranch.devintensive.models.data.ChatType
@@ -92,7 +93,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(itemView.context.colorFromAttribute(R.attr.colorBackground))
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
@@ -134,7 +135,7 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
         }
 
         override fun onItemCleared() {
-            itemView.setBackgroundColor(Color.WHITE)
+            itemView.setBackgroundColor(itemView.context.colorFromAttribute(R.attr.colorBackground))
         }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
