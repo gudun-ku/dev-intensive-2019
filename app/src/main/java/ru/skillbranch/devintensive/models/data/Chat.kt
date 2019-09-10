@@ -6,6 +6,7 @@ import ru.skillbranch.devintensive.extensions.shortFormat
 import ru.skillbranch.devintensive.models.BaseMessage
 import ru.skillbranch.devintensive.models.ImageMessage
 import ru.skillbranch.devintensive.models.TextMessage
+import ru.skillbranch.devintensive.repositories.ChatRepository
 import ru.skillbranch.devintensive.utils.Utils
 import java.util.*
 
@@ -38,37 +39,62 @@ data class Chat(
        }
     }
 
-    private fun isSingle(): Boolean = members.size == 1
+    private fun isSingle(): Boolean = members.size == 1 && !isArchived
+    private fun isGroup(): Boolean = members.size > 1 && !isArchived
 
     fun toChatItem(): ChatItem {
-        return if (isSingle()) {
-            val user = members.first()
-            ChatItem(
-                id,
-                user.avatar,
-                Utils.toInitials(user.firstName, user.lastName) ?: "??",
-                "${user.firstName ?: ""} ${user.lastName ?: ""}",
-                lastMessageShort().first,
-                unreadableMessageCount(),//messages.count(), //
-                lastMessageDate()?.shortFormat(),
-                user.isOnline
-            )
-        } else {
-            val user = members.first()
-            ChatItem(
-                id,
-                null,
-                Utils.toInitials(user.firstName, null) ?: "??",
-                title,
-                lastMessageShort().first,
-                unreadableMessageCount(),//messages.count(), //
-                lastMessageDate()?.shortFormat(),
-                false,
-                ChatType.GROUP,
-                lastMessageShort().second
-            )
+        return when {isSingle() -> {
+                val user = members.first()
+                ChatItem(
+                    id,
+                    user.avatar,
+                    Utils.toInitials(user.firstName, user.lastName) ?: "??",
+                    "${user.firstName ?: ""} ${user.lastName ?: ""}",
+                    lastMessageShort().first,
+                    unreadableMessageCount(),//messages.count(), //
+                    lastMessageDate()?.shortFormat(),
+                    user.isOnline,
+                    ChatType.SINGLE,
+                    lastMessageShort().second
+                )
         }
+        isGroup() ->
+            {
+                val user = members.first()
+                ChatItem(
+                    id,
+                    null,
+                    Utils.toInitials(user.firstName, null) ?: "??",
+                    title,
+                    lastMessageShort().first,
+                    unreadableMessageCount(),//messages.count(), //
+                    lastMessageDate()?.shortFormat(),
+                    false,
+                    ChatType.GROUP,
+                    lastMessageShort().second
+                )
+        }
+        else ->
+            {
+                val archivedChats = ChatRepository.loadChats().value!!.filter { it.isArchived }
+                .sortedBy { it.lastMessageDate() }
+                ChatItem(
+                    "-1",
+                    null,
+                    "",
+                    "",
+                    archivedChats.last().lastMessageShort().first,
+                    archivedChats.sumBy{it.unreadableMessageCount()},//messages.count(), //
+                    archivedChats.last().lastMessageDate()?.shortFormat(),
+                    false,
+                    ChatType.ARCHIVE,
+                    archivedChats.last().lastMessageShort()?.second
+                )
+            }
+        }
+
     }
+
 }
 
 enum class ChatType{

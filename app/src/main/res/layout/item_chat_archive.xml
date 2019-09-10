@@ -16,7 +16,7 @@
             android:src="@drawable/ic_archive_black_24dp"
             android:layout_marginRight="@dimen/spacing_normal_16"
             android:padding="@dimen/spacing_small_8"
-            android:alignParentLeft="true"/>
+            />
     <TextView
             android:id="@+id/tv_title_archive"
             android:layout_width="match_parent"
@@ -58,7 +58,7 @@
     />
 
     <TextView
-            android:id="@+id/tv_date_group"
+            android:id="@+id/tv_date_archive"
             android:text="10sp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"

@@ -12,9 +12,14 @@ class MainViewModel : ViewModel(){
     private val query = mutableLiveData("")
 
     private val chatRepository = ChatRepository
+
     private val chats = Transformations.map(chatRepository.loadChats()) {chats ->
-        return@map chats.filter { !it.isArchived }
-            .map {it.toChatItem()}
+        val chatsList = chats.filter { !it.isArchived }.toMutableList()
+        val archivedChatsCount = chats.count {it.isArchived}
+        if (archivedChatsCount >  0 ) {
+            chatsList.add(chats.filter { it.isArchived }.last())
+        }
+        return@map chatsList.map{it.toChatItem()}
             .sortedBy { it.id.toInt() }
     }
 
