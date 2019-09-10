@@ -14,6 +14,7 @@
         <item name="colorSecondary">@color/color_primary</item>
         <item name="colorBackground">@android:color/white</item>
         <item name="colorIndicator">@android:color/holo_green_light</item>
+        <item name="colorIconBackground">@color/color_gray</item>
 
 
 

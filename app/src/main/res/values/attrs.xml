@@ -9,6 +9,7 @@
     <attr name="colorBackground" format="reference"/>
     <attr name="colorIndicator" format="reference"/>
     <attr name="colorIcon" format="reference"/>
+    <attr name="colorIconBackground" format="reference"/>
 
     <declare-styleable name="CircleImageView">
         <attr name="cv_borderColor" format="color"/>

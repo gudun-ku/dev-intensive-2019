@@ -13,6 +13,7 @@
         <item name="colorSecondary">@color/color_accent_night</item>
         <item name="colorBackground">@color/color_primary_dark_night</item>
         <item name="colorIndicator">@color/color_accent_night</item>
+        <item name="colorIconBackground">@color/color_primary_light</item>
 
 
         <item name="android:statusBarColor">@android:color/black</item>
