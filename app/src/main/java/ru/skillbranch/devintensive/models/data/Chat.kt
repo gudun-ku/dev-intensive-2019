@@ -95,6 +95,22 @@ data class Chat(
 
     }
 
+    fun toArchivedChatItem(): ChatItem {
+        val user = members.first()
+        return ChatItem(
+            id,
+            user.avatar,
+            Utils.toInitials(user.firstName, user.lastName) ?: "??",
+            "${user.firstName ?: ""} ${user.lastName ?: ""}",
+            lastMessageShort().first,
+            unreadableMessageCount(),//messages.count(), //
+            lastMessageDate()?.shortFormat(),
+            user.isOnline,
+            ChatType.SINGLE,
+            lastMessageShort().second
+        )
+    }
+
 }
 
 enum class ChatType{

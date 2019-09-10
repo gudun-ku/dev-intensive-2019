@@ -88,15 +88,8 @@ class ChatAdapter(val listener : (ChatItem) -> Unit): RecyclerView.Adapter<ChatA
     }
 
 
-    inner class ArchiveViewHolder(convertView: View): ChatItemViewHolder(convertView), ItemTouchViewHolder {
-        //Item touch viewholder methods
-        override fun onItemSelected() {
-            itemView.setBackgroundColor(Color.LTGRAY)
-        }
+    inner class ArchiveViewHolder(convertView: View): ChatItemViewHolder(convertView) {
 
-        override fun onItemCleared() {
-            itemView.setBackgroundColor(itemView.context.colorFromAttribute(R.attr.colorBackground))
-        }
 
         override fun bind(item: ChatItem, listener: (ChatItem) -> Unit) {
 
