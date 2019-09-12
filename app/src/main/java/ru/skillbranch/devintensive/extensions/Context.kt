@@ -2,8 +2,6 @@ package ru.skillbranch.devintensive.extensions
 
 import android.content.Context
 import android.util.TypedValue
-import android.R
-
 
 
 fun Context.convertDpToPx(dp: Float): Float {

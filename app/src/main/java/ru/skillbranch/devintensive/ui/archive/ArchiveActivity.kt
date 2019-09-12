@@ -1,8 +1,10 @@
 package ru.skillbranch.devintensive.ui.archive
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -75,6 +77,8 @@ class ArchiveActivity : BaseActivity() {
         chatAdapter = ChatAdapter {
             val snackbar = Snackbar.make(rv_archive_list, "Кликнули на ${it.title}", Snackbar.LENGTH_LONG)
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+            val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+            tv.setTextColor(Color.BLACK)
             snackbar.setAction("ОТМЕНА") {
                 snackbar.dismiss()
             }
@@ -82,14 +86,16 @@ class ArchiveActivity : BaseActivity() {
         }
 
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        val touchCallBack = ChatItemTouchHelperCallback(chatAdapter) { chatItem ->
+        val touchCallBack = ChatItemTouchHelperCallback(chatAdapter, R.drawable.ic_unarchive_black_24dp) { chatItem ->
             viewModel.restoreFromArchive(chatItem.id)
             val snackbar = Snackbar.make(
                 rv_archive_list,
-                "Вы точно хотите восстановить ${chatItem.title} из архива?",
+                "Восстановить чат с ${chatItem.title} из архива?",
                 Snackbar.LENGTH_LONG
             )
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+            val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+            tv.setTextColor(Color.BLACK)
             snackbar.setAction("ОТМЕНА") {
                 viewModel.addToArchive(chatItem.id)
                 snackbar.dismiss()

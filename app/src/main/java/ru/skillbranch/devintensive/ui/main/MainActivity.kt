@@ -20,6 +20,11 @@ import ru.skillbranch.devintensive.ui.base.BaseActivity
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
+import android.graphics.Color
+import android.widget.TextView
+
+
+
 class MainActivity : BaseActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
@@ -72,6 +77,8 @@ class MainActivity : BaseActivity() {
                 else -> {
                     val snackbar = Snackbar.make(rv_chat_list, "Кликнули на ${it.title}", Snackbar.LENGTH_LONG)
                     snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+                    val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+                    tv.setTextColor(Color.BLACK)
                     snackbar.setAction("ОТМЕНА") {
                         snackbar.dismiss()
                     }
@@ -84,10 +91,12 @@ class MainActivity : BaseActivity() {
 
 
         val divider = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
-        val touchCallBack = ChatItemTouchHelperCallback(chatAdapter) { chatItem ->
+        val touchCallBack = ChatItemTouchHelperCallback(chatAdapter, R.drawable.ic_archive_black_24dp) { chatItem ->
             viewModel.addToArchive(chatItem.id)
             val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив?", Snackbar.LENGTH_LONG)
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
+            val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
+            tv.setTextColor(Color.BLACK)
             snackbar.setAction("ОТМЕНА") {
                 viewModel.restoreFromArchive(chatItem.id)
                 snackbar.dismiss()
