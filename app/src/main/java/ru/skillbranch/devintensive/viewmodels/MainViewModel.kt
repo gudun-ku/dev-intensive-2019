@@ -14,13 +14,21 @@ class MainViewModel : ViewModel(){
     private val chatRepository = ChatRepository
 
     private val chats = Transformations.map(chatRepository.loadChats()) {chats ->
-        val chatsList = chats.filter { !it.isArchived }.toMutableList()
-        val archivedChatsCount = chats.count {it.isArchived}
-        if (archivedChatsCount >  0 ) {
-            chatsList.add(chats.filter { it.isArchived }.last())
+
+        val archivedChats = chats
+            .filter { it.isArchived }
+            .map { it.toChatItem() }
+            .sortedBy { it.lastMessageDate }
+        if (archivedChats.count() < 1) {
+            return@map chats
+                .map { it.toChatItem() }
+                .sortedBy { it.id.toInt() }
+        } else {
+            val archiveList = mutableListOf<ChatItem>()
+            archiveList.add(0, archivedChats.last())
+            archiveList.addAll((chats.filter { !it.isArchived }.map { it.toChatItem() }))
+            return@map archiveList
         }
-        return@map chatsList.map{it.toChatItem()}
-            .sortedBy { it.id.toInt() }
     }
 
     fun getChatData(): LiveData<List<ChatItem>> {
