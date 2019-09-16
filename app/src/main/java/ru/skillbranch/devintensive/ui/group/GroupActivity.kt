@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
 import kotlinx.android.synthetic.main.activity_group.*
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
 import ru.skillbranch.devintensive.ui.base.BaseActivity
@@ -107,8 +108,8 @@ class GroupActivity : BaseActivity() {
             isCloseIconVisible = true
             tag = user.id
             isClickable = true
-            closeIconTint = ColorStateList.valueOf(Color.WHITE)
-            chipBackgroundColor = ColorStateList.valueOf(resources.getColor(R.color.color_primary_light,theme))
+            closeIconTint = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorChipIconBackground))
+            chipBackgroundColor = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorAccentedSurface))
             setTextColor(Color.WHITE)
         }
 

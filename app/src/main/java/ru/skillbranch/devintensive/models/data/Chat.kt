@@ -33,7 +33,7 @@ data class Chat(
        //TODO implement me
        null -> "Сообщений еще нет" to "@John_Doe"
        else -> {
-           if (lastMessage is TextMessage) lastMessage.text!! to lastMessage.from!!.firstName else "Изображение" to lastMessage.from!!.firstName
+           if (lastMessage is TextMessage) lastMessage.text!! to lastMessage.from!!.firstName else "Изображение" to "@${lastMessage.from!!.firstName}"
        }
     }
 

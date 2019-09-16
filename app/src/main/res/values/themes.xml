@@ -15,6 +15,7 @@
         <item name="colorBackground">@android:color/white</item>
         <item name="colorIndicator">@android:color/holo_green_light</item>
         <item name="colorIconBackground">@color/color_gray</item>
+        <item name="colorChipIconBackground">@android:color/white</item>
 
 
 
