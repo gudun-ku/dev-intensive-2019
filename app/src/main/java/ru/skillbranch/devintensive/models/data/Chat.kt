@@ -82,7 +82,7 @@ data class Chat(
                 "-1",
                 null,
                 "",
-                "",
+                "Архив чатов",
                 archivedChats.last().lastMessageShort().first,
                 archivedChats.sumBy{it.unreadableMessageCount()},//messages.count(), //
                 archivedChats.last().lastMessageDate()?.shortFormat(),
