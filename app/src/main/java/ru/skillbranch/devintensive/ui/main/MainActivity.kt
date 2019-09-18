@@ -32,7 +32,6 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setTheme(R.style.AppTheme)
         setContentView(R.layout.activity_main)
         initToolbar()
         initViews()
@@ -43,7 +42,7 @@ class MainActivity : BaseActivity() {
         menuInflater.inflate(R.menu.menu_search, menu)
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
-        searchView.queryHint = "Введите название чата"
+        searchView.queryHint = "Введите заголовок чата"
 
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {

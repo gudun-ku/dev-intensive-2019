@@ -22,7 +22,6 @@ class App: Application() {
         super.onCreate()
         PreferencesRepository.getAppTheme().also {
             AppCompatDelegate.setDefaultNightMode(it)
-            setTheme(R.style.AppTheme)
         }
     }
 }

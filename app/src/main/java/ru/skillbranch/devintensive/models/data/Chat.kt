@@ -88,7 +88,7 @@ data class Chat(
                 archivedChats.last().lastMessageDate()?.shortFormat(),
                 false,
                 ChatType.ARCHIVE,
-                archivedChats.last().lastMessageShort()?.second
+                archivedChats.last().lastMessageShort().second
             )
         }
     }
