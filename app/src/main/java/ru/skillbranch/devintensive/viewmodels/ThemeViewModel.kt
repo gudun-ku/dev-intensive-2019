@@ -25,10 +25,10 @@ class ThemeViewModel: ViewModel() {
     fun getTheme(): LiveData<Int> = appTheme
 
     fun switchTheme() {
-        if(appTheme.value == AppCompatDelegate.MODE_NIGHT_YES) {
-            appTheme.value = AppCompatDelegate.MODE_NIGHT_NO
-        } else {
+        if(appTheme.value == AppCompatDelegate.MODE_NIGHT_NO) {
             appTheme.value = AppCompatDelegate.MODE_NIGHT_YES
+        } else {
+            appTheme.value = AppCompatDelegate.MODE_NIGHT_NO
         }
         repository.saveAppTheme(appTheme.value!!)
     }
