@@ -68,6 +68,7 @@
             tools:visibility="visible"
             tools:scaleX="1"
             tools:scaleY="1"
+            android:background="?attr/colorAccent"
     />
 
 
