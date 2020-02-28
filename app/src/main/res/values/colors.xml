@@ -17,4 +17,5 @@
 
     <color name="color_indicator">#473770</color>
     <color name="color_green">#3AA43F</color>
+    <color name="color_gray_night">#121212</color>
 </resources>

@@ -22,7 +22,7 @@ import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
 import android.graphics.Color
 import android.widget.TextView
-
+import ru.skillbranch.devintensive.extensions.colorFromAttribute
 
 
 class MainActivity : BaseActivity() {
@@ -77,7 +77,7 @@ class MainActivity : BaseActivity() {
                     val snackbar = Snackbar.make(rv_chat_list, "Кликнули на ${it.title}", Snackbar.LENGTH_LONG)
                     snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
                     val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
-                    tv.setTextColor(Color.BLACK)
+                    tv.setTextColor(this.colorFromAttribute(R.attr.colorSnackbarText))
                     snackbar.setAction("ОТМЕНА") {
                         snackbar.dismiss()
                     }
@@ -95,7 +95,7 @@ class MainActivity : BaseActivity() {
             val snackbar = Snackbar.make(rv_chat_list, "Вы точно хотите добавить ${chatItem.title} в архив?", Snackbar.LENGTH_LONG)
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
             val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
-            tv.setTextColor(Color.BLACK)
+            tv.setTextColor(this.colorFromAttribute(R.attr.colorSnackbarText))
             snackbar.setAction("ОТМЕНА") {
                 viewModel.restoreFromArchive(chatItem.id)
                 snackbar.dismiss()

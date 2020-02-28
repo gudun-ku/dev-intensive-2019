@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_archive.*
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.skillbranch.devintensive.R
+import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.base.BaseActivity
@@ -78,7 +79,7 @@ class ArchiveActivity : BaseActivity() {
             val snackbar = Snackbar.make(rv_archive_list, "Кликнули на ${it.title}", Snackbar.LENGTH_LONG)
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
             val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
-            tv.setTextColor(Color.BLACK)
+            tv.setTextColor(this.colorFromAttribute(R.attr.colorSnackbarText))
             snackbar.setAction("ОТМЕНА") {
                 snackbar.dismiss()
             }
@@ -95,7 +96,7 @@ class ArchiveActivity : BaseActivity() {
             )
             snackbar.view.background = resources.getDrawable(R.drawable.bg_snackbar, theme)
             val tv = snackbar.view.findViewById(R.id.snackbar_text) as TextView
-            tv.setTextColor(Color.BLACK)
+            tv.setTextColor(this.colorFromAttribute(R.attr.colorSnackbarText))
             snackbar.setAction("ОТМЕНА") {
                 viewModel.addToArchive(chatItem.id)
                 snackbar.dismiss()

@@ -16,12 +16,10 @@
         <item name="colorIndicator">@android:color/holo_green_light</item>
         <item name="colorIconBackground">@color/color_gray</item>
         <item name="colorChipIconBackground">@android:color/white</item>
-
-
+        <item name="colorSnackbarText">@android:color/white</item>
 
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
-
         <item name="android:listDivider">@drawable/bg_divider</item>
     </style>
 

@@ -11,6 +11,7 @@
     <attr name="colorIcon" format="reference"/>
     <attr name="colorIconBackground" format="reference"/>
     <attr name="colorChipIconBackground" format="reference"/>
+    <attr name="colorSnackbarText" format="reference"/>
 
     <declare-styleable name="CircleImageView">
         <attr name="cv_borderColor" format="color"/>
