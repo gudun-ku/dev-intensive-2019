@@ -1,10 +1,11 @@
 package ru.skillbranch.devintensive.ui.archive
 
-import android.graphics.Color
+
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,25 +14,25 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_archive.*
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.toolbar
 import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
-import ru.skillbranch.devintensive.ui.base.BaseActivity
 import ru.skillbranch.devintensive.viewmodels.ArchiveViewModel
+import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
-
-class ArchiveActivity : BaseActivity() {
+class ArchiveActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var viewModel: ArchiveViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_archive)
+        setTheme(R.style.AppTheme)
         initToolbar()
         initViews()
         initViewModel()
@@ -115,8 +116,14 @@ class ArchiveActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        profileViewModel.getTheme().observe(this, Observer { updateTheme(it) })
         viewModel = ViewModelProviders.of(this).get(ArchiveViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it)})
+    }
+
+    private fun updateTheme(mode: Int) {
+        delegate.setLocalNightMode(mode)
     }
 
 }

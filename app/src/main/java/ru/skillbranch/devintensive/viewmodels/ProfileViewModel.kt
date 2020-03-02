@@ -23,8 +23,6 @@ class ProfileViewModel: ViewModel() {
         profileData.value = repository.getProfile()
         appTheme.value = repository.getAppTheme()
 
-
-
         makeDefaultDrawable(profileData.value as Profile)
     }
 

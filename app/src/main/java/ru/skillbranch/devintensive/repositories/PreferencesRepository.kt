@@ -6,9 +6,7 @@ import android.preference.PreferenceManager
 import androidx.appcompat.app.AppCompatDelegate
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.models.Profile
-import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
 import ru.skillbranch.devintensive.utils.Utils
 object PreferencesRepository {
 
@@ -67,11 +65,10 @@ object PreferencesRepository {
         apply()
     }
 
-
    fun getInitialsDrawable(profile: Profile, color: Int): Drawable? {
 
         return if (profile.initials.isNullOrEmpty())  null
-        else  TextDrawable
+        else  Utils.TextDrawable
                 .builder()
                 .beginConfig()
                 .width(App.applicationContext().resources.getDimension(R.dimen.avatar_round_size).toInt())
@@ -80,6 +77,5 @@ object PreferencesRepository {
                 .endConfig()
                 .buildRound(profile.initials,color)
     }
-
 
 }

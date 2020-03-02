@@ -16,26 +16,30 @@ import ru.skillbranch.devintensive.models.data.ChatType
 import ru.skillbranch.devintensive.ui.adapters.ChatAdapter
 import ru.skillbranch.devintensive.ui.adapters.ChatItemTouchHelperCallback
 import ru.skillbranch.devintensive.ui.archive.ArchiveActivity
-import ru.skillbranch.devintensive.ui.base.BaseActivity
 import ru.skillbranch.devintensive.ui.group.GroupActivity
 import ru.skillbranch.devintensive.viewmodels.MainViewModel
 
-import android.graphics.Color
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import ru.skillbranch.devintensive.extensions.colorFromAttribute
+import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 
-class MainActivity : BaseActivity() {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var chatAdapter: ChatAdapter
+    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setTheme(R.style.AppTheme)
+
         initToolbar()
         initViews()
         initViewModel()
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -118,10 +122,15 @@ class MainActivity : BaseActivity() {
         }
     }
 
-
     private fun initViewModel() {
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        profileViewModel.getTheme().observe(this, Observer { updateTheme(it) })
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getChatData().observe(this, Observer { chatAdapter.updateData(it)})
+    }
+
+    private fun updateTheme(mode: Int) {
+        delegate.setLocalNightMode(mode)
     }
 
 }

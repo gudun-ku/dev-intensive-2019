@@ -1,13 +1,10 @@
 package ru.skillbranch.devintensive.ui.custom
 
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import ru.skillbranch.devintensive.App
 import ru.skillbranch.devintensive.R
-import ru.skillbranch.devintensive.models.textdrawable.TextDrawable
-import ru.skillbranch.devintensive.utils.ColorHash
 import ru.skillbranch.devintensive.utils.Utils
 
 
@@ -27,16 +24,16 @@ open class AvatarImageView @JvmOverloads constructor(
         }
     }
 
-    //TODO - here need to make measurements
     private fun makeInitialsDrawable(initials: String): Drawable? {
 
-        return TextDrawable
+        return Utils.TextDrawable
             .builder()
             .beginConfig()
             .width(App.applicationContext().resources.getDimension(R.dimen.btn_round_size_40).toInt())
             .height(App.applicationContext().resources.getDimension(R.dimen.btn_round_size_40).toInt())
             .fontSize(Utils.convertSpToPx(16f))
             .endConfig()
-            .buildRound(initials ,ColorHash.getColor(initials))
+            .buildRound(initials ,Utils.ColorHash.getColor(initials))
     }
+
 }

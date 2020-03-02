@@ -2,11 +2,12 @@ package ru.skillbranch.devintensive.ui.group
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import androidx.lifecycle.Observer
@@ -19,17 +20,20 @@ import ru.skillbranch.devintensive.R
 import ru.skillbranch.devintensive.extensions.colorFromAttribute
 import ru.skillbranch.devintensive.models.data.UserItem
 import ru.skillbranch.devintensive.ui.adapters.UserAdapter
-import ru.skillbranch.devintensive.ui.base.BaseActivity
 import ru.skillbranch.devintensive.viewmodels.GroupViewModel
+import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
-class GroupActivity : BaseActivity() {
+
+class GroupActivity : AppCompatActivity() {
 
     private lateinit var usersAdapter: UserAdapter
+    private lateinit var profileViewModel: ProfileViewModel
     private lateinit var viewModel: GroupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_group)
+        setTheme(R.style.AppTheme)
         initToolbar()
         initViews()
         initViewModel()
@@ -88,6 +92,8 @@ class GroupActivity : BaseActivity() {
     }
 
     private fun initViewModel() {
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel::class.java)
+        profileViewModel.getTheme().observe(this, Observer { updateTheme(it) })
         viewModel = ViewModelProviders.of(this).get(GroupViewModel::class.java)
         viewModel.getUsersData().observe(this, Observer { usersAdapter.updateData(it)})
         viewModel.getSelectedData().observe(this, Observer {
@@ -102,17 +108,8 @@ class GroupActivity : BaseActivity() {
     }
 
     private fun addChipToGroup(user: UserItem) {
-        val chip = Chip(this).apply {
-            text = user.fullName
-            chipIcon = resources.getDrawable(R.drawable.avatar_default, theme)
-            isCloseIconVisible = true
-            tag = user.id
-            isClickable = true
-            closeIconTint = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorChipIconBackground))
-            chipBackgroundColor = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorAccentedSurface))
-            setTextColor(Color.WHITE)
-        }
 
+        val chip = getChipWithIcon(user, resources.getDrawable(R.drawable.avatar_default, theme))
         chip.setOnCloseIconClickListener{ viewModel.handleRemoveChip(it.tag.toString())}
         chip_group.addView(chip)
     }
@@ -134,7 +131,48 @@ class GroupActivity : BaseActivity() {
         }
 
         users.forEach{(_,v)-> addChipToGroup(v) }
+    }
 
+    private fun updateTheme(mode: Int) {
+        delegate.setLocalNightMode(mode)
+    }
+
+    fun getChipWithIcon(user: UserItem, errDrawable: Drawable):Chip {
+        val chip = Chip(this).apply {
+            text = user.fullName
+            chipIcon = errDrawable
+            isCloseIconVisible = true
+            tag = user.id
+            isClickable = true
+            closeIconTint = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorChipIconBackground))
+            chipBackgroundColor = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorAccentedSurface))
+            setTextColor(Color.WHITE)
+        }
+//      Glide.with(this)
+//            .load(user.avatar)
+//            .listener(object : RequestListener<Drawable?> {
+//                override fun onLoadFailed(
+//                    e: GlideException?,
+//                    model: Any?,
+//                    target: Target<Drawable?>?,
+//                    isFirstResource: Boolean
+//                ): Boolean {
+//                    chip.chipIcon = errDrawable
+//                    return false
+//                }
+//
+//                override fun onResourceReady(
+//                    resource: Drawable?,
+//                    model: Any?,
+//                    target: Target<Drawable?>?,
+//                    dataSource: DataSource?,
+//                    isFirstResource: Boolean
+//                ): Boolean {
+//                    chip.chipIcon = resource
+//                    return false
+//                }
+//            }).preload()
+       return chip
     }
 
 }

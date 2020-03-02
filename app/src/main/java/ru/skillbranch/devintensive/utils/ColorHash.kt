@@ -4,11 +4,10 @@ import android.graphics.Color
 
 object ColorHash {
 
-    val S = floatArrayOf(0.35f, 0.5f, 0.65f)
-    val L = floatArrayOf(0.35f, 0.5f, 0.65f)
+    private val S = floatArrayOf(0.35f, 0.5f, 0.65f)
+    private val L = floatArrayOf(0.35f, 0.5f, 0.65f)
 
-
-    fun hslFromStr(str: String): FloatArray {
+    private fun hslFromStr(str: String): FloatArray {
         var hash = BKDRHash(str)
 
         val H =  (hash % 359).toFloat()
@@ -20,7 +19,7 @@ object ColorHash {
         return floatArrayOf(H,S,L )
     }
 
-    fun BKDRHash(str: String): Int {
+    private fun BKDRHash(str: String): Int {
         val seed = 131
         val seed2 = 137
         var hash = 0
