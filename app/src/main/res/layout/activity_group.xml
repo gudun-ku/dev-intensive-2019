@@ -6,7 +6,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.group.GroupActivity"
-        android:background="?attr/colorBackgroundFloating"
     >
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -30,6 +29,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_marginTop="?attr/actionBarSize"
+            android:background="?attr/colorBackground"
     >
         <com.google.android.material.chip.ChipGroup
                 android:id="@+id/chip_group"
@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 tools:listitem="@layout/item_user_list"
+                android:background="?attr/colorBackgroundFloating"
         >
 
         </androidx.recyclerview.widget.RecyclerView>
