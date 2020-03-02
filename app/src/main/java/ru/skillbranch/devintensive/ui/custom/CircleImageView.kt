@@ -195,7 +195,7 @@ open class CircleImageView @JvmOverloads constructor(
 
         if (image == null) return
 
-        bitmapShader = BitmapShader(image, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
+        bitmapShader = BitmapShader(image as Bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP)
         imagePaint.shader = bitmapShader
         updateImageSize()
     }
