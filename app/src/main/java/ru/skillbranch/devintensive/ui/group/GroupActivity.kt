@@ -148,30 +148,32 @@ class GroupActivity : AppCompatActivity() {
             chipBackgroundColor = ColorStateList.valueOf(this.context.colorFromAttribute(R.attr.colorAccentedSurface))
             setTextColor(Color.WHITE)
         }
-//      Glide.with(this)
-//            .load(user.avatar)
-//            .listener(object : RequestListener<Drawable?> {
-//                override fun onLoadFailed(
-//                    e: GlideException?,
-//                    model: Any?,
-//                    target: Target<Drawable?>?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    chip.chipIcon = errDrawable
-//                    return false
-//                }
-//
-//                override fun onResourceReady(
-//                    resource: Drawable?,
-//                    model: Any?,
-//                    target: Target<Drawable?>?,
-//                    dataSource: DataSource?,
-//                    isFirstResource: Boolean
-//                ): Boolean {
-//                    chip.chipIcon = resource
-//                    return false
-//                }
-//            }).preload()
+        /*
+          Glide.with(this)
+                .load(user.avatar)
+                .listener(object : RequestListener<Drawable?> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable?>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        chip.chipIcon = errDrawable
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable?>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        chip.chipIcon = resource
+                        return false
+                    }
+                }).preload()
+         */
        return chip
     }
 
