@@ -12,6 +12,10 @@ import android.graphics.Shader
 import android.graphics.BitmapShader
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
+import android.graphics.drawable.shapes.RectShape
+import android.graphics.drawable.shapes.RoundRectShape
 import android.net.Uri
 import androidx.appcompat.content.res.AppCompatResources
 import ru.skillbranch.devintensive.utils.Utils
@@ -32,19 +36,15 @@ open class CircleImageView @JvmOverloads constructor(
 
     private var image: Bitmap? = null
     private var civDrawable: Drawable? = null
-    private lateinit var clipPath: Path
-    private lateinit var imagePaint: Paint
-    private lateinit var borderPaint: Paint
-    private lateinit var imageBounds: RectF
-    private lateinit var borderBounds: RectF
+    private var clipPath: Path
+    private var imagePaint: Paint
+    private var borderPaint: Paint
+    private var imageBounds: RectF
+    private var borderBounds: RectF
 
     private lateinit var bitmapShader: Shader
     private var shaderMatrix = Matrix()
     private var initialized = false
-
-
-
-
 
     private var borderWidth =   DEFAULT_BORDER_WIDTH
     private var borderColor =   DEFAULT_BORDER_COLOR
@@ -251,4 +251,6 @@ open class CircleImageView @JvmOverloads constructor(
         drawImage(canvas)
         drawBorder(canvas)
     }
+
+
 }

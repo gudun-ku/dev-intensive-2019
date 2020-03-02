@@ -7,7 +7,6 @@
         <item name="colorPrimary">@color/color_primary</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_accent</item>
-
         <item name="colorAccentedSurface">@color/color_primary_light</item>
         <item name="colorIcon">@color/color_primary</item>
         <item name="colorDivider">@color/color_divider_dark</item>
@@ -18,11 +17,8 @@
         <item name="colorChipIconBackground">@android:color/white</item>
         <item name="colorSnackbarText">@android:color/white</item>
 
-
-
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransitions</item>
-
         <item name="android:listDivider">@drawable/bg_divider</item>
     </style>
 
