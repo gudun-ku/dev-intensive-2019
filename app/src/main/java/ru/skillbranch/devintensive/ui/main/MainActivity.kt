@@ -57,8 +57,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
-
-
         return super.onCreateOptionsMenu(menu)
     }
 

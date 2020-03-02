@@ -9,7 +9,7 @@
 
         <item name="colorAccentedSurface">@color/color_divider_light</item>
         <item name="colorIcon">@android:color/white</item>
-        <item name="colorDivider">@color/color_divider_dark</item>
+        <item name="colorDivider">@color/color_divider_light</item>
         <item name="colorSecondary">@color/color_accent_night</item>
         <item name="colorBackground">@color/color_primary_dark_night</item>
         <item name="colorIndicator">@color/color_accent_night</item>
