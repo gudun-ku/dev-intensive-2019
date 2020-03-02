@@ -3,6 +3,7 @@ package ru.skillbranch.devintensive.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,6 +22,7 @@ import ru.skillbranch.devintensive.viewmodels.MainViewModel
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import ru.skillbranch.devintensive.extensions.colorFromAttribute
+import ru.skillbranch.devintensive.ui.profile.ProfileActivity
 import ru.skillbranch.devintensive.viewmodels.ProfileViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -62,6 +64,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initToolbar() {
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.ic_menu_black_24dp)
     }
 
     private fun initViews() {
@@ -116,6 +120,16 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val intent = Intent(this, GroupActivity::class.java)
             startActivity(intent)
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return if(item?.itemId == android.R.id.home) {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 
